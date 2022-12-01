@@ -1,7 +1,6 @@
 function play(playerChoice)
 {
     let cpuChoice = getComputerChoice();
-    playerChoice = formatPlayerChoice(playerChoice);
     if (playerChoice !== null)
     {
         console.log(GetWinner(cpuChoice, playerChoice));
@@ -72,19 +71,6 @@ function declareWinner(winner, winnerChoice, loser, loserChoice)
 function declareDraw()
 {
     return "Draw";
-}
-
-function formatPlayerChoice(playerChoice)
-{
-    if (playerChoice && playerChoice.length >= 4)
-    {
-        playerChoice = playerChoice[0].toUpperCase() + playerChoice.substring(1).toLowerCase();
-        if (playerChoice === "Rock" || playerChoice === "Paper" || playerChoice === "Scissors")
-        {
-            return playerChoice;
-        }
-    }
-    return null;
 }
 
 function getComputerChoice()

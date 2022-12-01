@@ -9,8 +9,12 @@
 <body>
     <script src="javascript.js"></script>
     <form>
-        Enter Rock, Paper, or Scissors! <input type="text" id="game"><br>
-        <input type="button" onclick="play(document.getElementById('game').value)" value="Submit">
+        Select Rock, Paper, or Scissors! <select id="options">
+            <option value="Rock">Rock</option>
+            <option value="Paper">Paper</option>
+            <option value="Scissors">Scissors</option>
+        </select>
+        <input type="button" onclick="play(document.getElementById('options').value)" value="Submit">
     </form>
 </body>
 </html>
