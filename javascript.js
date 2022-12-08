@@ -1,14 +1,72 @@
-function play(playerChoice)
-{
-    let cpuChoice = getComputerChoice();
-    if (playerChoice !== null)
-    {
-        console.log(GetWinner(cpuChoice, playerChoice));
-    }
+const rock = document.querySelector('#rock');
+rock.addEventListener('click', play);
+rock.myParam = "Rock";
+const paper = document.querySelector('#paper');
+paper.addEventListener('click', play);
+paper.myParam = "Paper";
+const scissors = document.querySelector('#scissors');
+scissors.addEventListener('click', play);
+scissors.myParam = "Scissors";
 
+let winner;
+let playerScore = 0;
+let cpuScore = 0;
+let actionText = "";
+
+const playerUI = document.querySelector("#player");
+const actionTextUI = document.querySelector("#action");
+const cpuUI = document.querySelector("#cpu");
+
+function setUI(actionText)
+{
+    playerUI.textContent = `Player: ${playerScore}`;
+    cpuUI.textContent = `CPU: ${cpuScore}`;
+    actionTextUI.textContent = actionText;
 }
 
-function GetWinner(cpuChoice, playerChoice)
+function resetUI()
+{
+    playerUI.textContent =`Player: 0`;
+    cpuUI.textContent = `CPU: 0`;
+    actionTextUI.textContent = "Starting new";
+}
+
+function play(evt)
+{
+    if (playerScore >= 5 || cpuScore >= 5)
+    {
+        playerScore = cpuScore = 0;
+        resetUI();
+        return;
+    }
+
+    let cpuChoice = getComputerChoice();
+    let playerChoice = evt.currentTarget.myParam;
+
+    let winner = getWinner(cpuChoice, playerChoice);
+    
+    
+    if (winner === "player")
+    {
+        actionText = declareWinner("Player", playerChoice, "Cpu", cpuChoice);
+        playerScore++;
+
+    }
+    else if (winner === "cpu")
+    {
+        actionText = declareWinner("CPU", cpuChoice,
+        "Player", playerChoice);
+        cpuScore++;
+    }
+    else
+    {
+        actionText = declareDraw();
+    }
+
+    setUI(actionText);
+}
+
+function getWinner(cpuChoice, playerChoice)
 {
     let playerWins = false;
     switch (playerChoice)
@@ -17,7 +75,7 @@ function GetWinner(cpuChoice, playerChoice)
             switch (cpuChoice)
             {
                 case "Rock":
-                    return declareDraw();
+                    return "draw";
                 case "Paper":
                     playerWins = false;
                     break;
@@ -33,7 +91,7 @@ function GetWinner(cpuChoice, playerChoice)
                     playerWins = true;
                     break;
                 case "Paper":
-                    return declareDraw();                    
+                    return "draw";  
                 case "Scissors":
                     playerWins = false;
                     break;
@@ -49,17 +107,18 @@ function GetWinner(cpuChoice, playerChoice)
                     playerWins = true;
                     break;
                 case "Scissors":
-                    return declareDraw();
+                    return "draw";
             }
             break;
     }
+
     if (playerWins)
     {
-        return declareWinner("Player", playerChoice, "CPU", cpuChoice)
+        return "player"
     }
     else
     {
-        return declareWinner("CPU", cpuChoice, "Player", playerChoice)
+        return "cpu"
     }
 }
 

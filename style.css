@@ -1,0 +1,42 @@
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+ul {
+    display: flex;
+    list-style-type: none;
+    padding: 0 8px;
+    justify-content: space-between;
+}
+
+li {
+    border: 1px solid black;
+    padding: 8px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-evenly;
+}
+button {
+    flex: 1;
+}
+
+#player {
+    background-color: rgb(49, 49, 160);
+    color: white
+}
+
+#action {
+    flex: 2 1 auto;
+    text-align: center;
+    background-color: grey;
+    color: white;
+}
+
+#cpu {
+    background-color: rgb(175, 39, 39);
+    color: white;
+}
